@@ -5,7 +5,6 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-    
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     restart: always
@@ -14,15 +13,13 @@ services:
     links:
       - db:db
   php:
-    build: php
+    image: php
     expose:
       - "9000"
     volumes:
       - ./php/www:/var/www/html
   apache2:
     image: webdevops/apache:latest
-    args:
-      - PHP_SOCKET=php:9000
     volumes:
       - ./php/www:/var/www/html
     ports:
