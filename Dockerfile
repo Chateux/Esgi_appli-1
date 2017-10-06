@@ -1,4 +1,4 @@
-FROM alpine
+FROM debian
 
 
 MAINTAINER Chateux <nouve.yann@gmail.com>
@@ -31,10 +31,6 @@ RUN tar -xzf ZendFramework-1.12.3.tar.gz -C /home/
 RUN rm -f ZendFramework-1.12.3.tar.gz 
 RUN pear install Image_Text-beta
 
-# php.ini settings
-RUN sed -ie 's/\;date\.timezone\ \=/date\.timezone\ \=\ Europe\/London/g' /etc/php5/apache2/php.ini 
-RUN sed -i "s/;include_path = \"\.:.*/include_path = \".:\/usr\/share\/php:\/home\/ZendFramework-1.12.3\/library\"/" /etc/php5/apache2/php.ini 
-RUN sed -i "s/error_reporting = .*$/error_reporting = E_ALL \& ~E_NOTICE \& ~E_STRICT \& ~E_DEPRECATED/" /etc/php5/apache2/php.ini 
 
 EXPOSE 80
 
